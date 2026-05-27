@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Poster Prompt Generator</title>
+    <!-- Using Tailwind CSS for professional styling (White, Blue, Orange theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for better UX */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Smooth transitions */
+        .input-transition { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-md py-6">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold tracking-tight mb-2">Pro Poster Prompt Generator</h1>
+            <p class="text-blue-100 text-sm">Design stunning posters with optimized AI prompts.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Left Column: Form Parameters -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-orange-500">
+                <h2 class="text-xl font-semibold mb-6 text-blue-700 flex items-center">
+                    <!-- Icon Placeholder: Replace src with your local icon path later -->
+                    <img src="./icons/settings.png" alt="" class="w-6 h-6 mr-2 object-contain" onerror="this.style.display='none'"> 
+                    Prompt Parameters
+                </h2>
+                
+                <form id="promptForm" class="space-y-5">
+                    
+                    <!-- Subject Focus -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                            <img src="./icons/subject.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                            Main Subject / Character
+                        </label>
+                        <input type="text" id="p_subject" placeholder="e.g., A futuristic samurai, A glowing magical tree..." 
+                            class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Art Style -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                            <img src="./icons/style.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                            Art Style
+                        </label>
+                        <select id="p_style" class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">-- Select a Style --</option>
+                            <option value="Photorealistic, 8k resolution, highly detailed">Photorealistic</option>
+                            <option value="3D render, Unreal Engine 5 style, octane render">3D Render</option>
+                            <option value="Cyberpunk aesthetic, neon city vibe">Cyberpunk</option>
+                            <option value="Anime style, Studio Ghibli inspired">Anime</option>
+                            <option value="Minimalist, flat vector art">Minimalist</option>
+                            <option value="Vintage retro poster style, halftone print">Vintage / Retro</option>
+                            <option value="Watercolor painting, expressive brush strokes">Watercolor</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Lighting -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                                <img src="./icons/lighting.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                                Lighting
+                            </label>
+                            <select id="p_lighting" class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">-- Select Lighting --</option>
+                                <option value="Cinematic lighting, dramatic shadows">Cinematic</option>
+                                <option value="Natural sunlight, golden hour">Golden Hour</option>
+                                <option value="Neon glow lighting, high contrast">Neon Glow</option>
+                                <option value="Soft studio lighting, diffused">Soft Studio</option>
+                                <option value="Volumetric lighting, god rays">Volumetric</option>
+                            </select>
+                        </div>
+
+                        <!-- Color Palette -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                                <img src="./icons/color.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                                Color Palette
+                            </label>
+                            <select id="p_color" class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">-- Select Colors --</option>
+                                <option value="Vibrant and saturated colors">Vibrant</option>
+                                <option value="Dark and moody tones">Dark & Moody</option>
+                                <option value="Pastel color palette, soft hues">Pastel</option>
+                                <option value="Monochromatic black and white">Black & White</option>
+                                <option value="Complimentary colors (Orange and Teal)">Orange & Teal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Mood -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                                <img src="./icons/mood.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                                Mood / Atmosphere
+                            </label>
+                            <select id="p_mood" class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">-- Select Mood --</option>
+                                <option value="Epic and majestic atmosphere">Epic</option>
+                                <option value="Calm, peaceful, and serene">Calm</option>
+                                <option value="Mysterious and enigmatic">Mysterious</option>
+                                <option value="Cheerful, energetic, and playful">Energetic</option>
+                                <option value="Horror, eerie, and unsettling">Eerie</option>
+                            </select>
+                        </div>
+
+                        <!-- Aspect Ratio -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                                <img src="./icons/ratio.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                                Aspect Ratio
+                            </label>
+                            <select id="p_ratio" class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="--ar 2:3">Poster (2:3)</option>
+                                <option value="--ar 3:4">Portrait (3:4)</option>
+                                <option value="--ar 9:16">Vertical / Story (9:16)</option>
+                                <option value="--ar 16:9">Widescreen (16:9)</option>
+                                <option value="--ar 1:1">Square (1:1)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center">
+                            <img src="./icons/details.png" alt="" class="w-4 h-4 mr-2" onerror="this.style.display='none'"> 
+                            Additional Details / Typography
+                        </label>
+                        <textarea id="p_details" rows="3" placeholder="e.g., Include bold typography saying 'FUTURE', leave negative space at the top..." 
+                            class="input-transition w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <button type="button" onclick="generatePrompt()" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-colors flex justify-center items-center">
+                        <img src="./icons/generate.png" alt="" class="w-5 h-5 mr-2" onerror="this.style.display='none'"> 
+                        Generate Prompt
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Output & Actions -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-blue-600 flex flex-col">
+                <h2 class="text-xl font-semibold mb-6 text-orange-600 flex items-center">
+                    <img src="./icons/output.png" alt="" class="w-6 h-6 mr-2" onerror="this.style.display='none'"> 
+                    Generated Prompt
+                </h2>
+                
+                <p class="text-sm text-slate-500 mb-2">You can review, edit, copy, and save your final prompt below.</p>
+                
+                <textarea id="finalPrompt" rows="10" 
+                    class="flex-grow w-full border-2 border-slate-200 bg-slate-50 rounded-lg p-4 text-slate-700 font-medium focus:outline-none focus:border-orange-400 focus:bg-white resize-none mb-6"
+                    placeholder="Your prompt will appear here..."></textarea>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button type="button" onclick="copyPrompt()" 
+                        class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-4 rounded-lg shadow transition-colors flex justify-center items-center">
+                        <img src="./icons/copy.png" alt="" class="w-5 h-5 mr-2" onerror="this.style.display='none'"> 
+                        Copy to Clipboard
+                    </button>
+                    
+                    <button type="button" onclick="saveToDatabase()" id="btnSave"
+                        class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow transition-colors flex justify-center items-center">
+                        <img src="./icons/save.png" alt="" class="w-5 h-5 mr-2" onerror="this.style.display='none'"> 
+                        Save to Database
+                    </button>
+                </div>
+                
+                <!-- Status Message -->
+                <p id="statusMsg" class="mt-4 text-center text-sm font-medium hidden"></p>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer with Developer Credit -->
+    <footer class="bg-slate-800 text-slate-300 py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">
+                Designed & Developed by <br>
+                <span class="text-white font-semibold text-base text-orange-400">Ts. Dr. Sulaiman Sabikan</span> <br>
+                Universiti Teknikal Malaysia Melaka (UTeM)
+            </p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+        const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwxj_R8U1n3vxSLnAB9mv0aNT1zB3VqkgKo6E4m7Y5Y4MsVgvmpRc2XYpvL6LbpNiP6hA/exec";
+
+        function generatePrompt() {
+            const subject = document.getElementById('p_subject').value.trim();
+            const style = document.getElementById('p_style').value;
+            const lighting = document.getElementById('p_lighting').value;
+            const color = document.getElementById('p_color').value;
+            const mood = document.getElementById('p_mood').value;
+            const details = document.getElementById('p_details').value.trim();
+            const ratio = document.getElementById('p_ratio').value;
+
+            if (!subject) {
+                showStatus("Please enter a Main Subject first!", "error");
+                document.getElementById('p_subject').focus();
+                return;
+            }
+
+            // Build the prompt by combining selected parts
+            let promptParts = [subject];
+            
+            if (style) promptParts.push(style);
+            if (lighting) promptParts.push(lighting);
+            if (color) promptParts.push(color);
+            if (mood) promptParts.push(mood);
+            if (details) promptParts.push(details);
+
+            // Combine with commas and add aspect ratio at the end
+            let finalPrompt = promptParts.join(", ");
+            finalPrompt += ` ${ratio}`;
+
+            document.getElementById('finalPrompt').value = finalPrompt;
+            showStatus("Prompt generated successfully!", "success");
+        }
+
+        function copyPrompt() {
+            const outputBox = document.getElementById('finalPrompt');
+            if (!outputBox.value.trim()) {
+                showStatus("Nothing to copy. Generate a prompt first.", "error");
+                return;
+            }
+            
+            // Select and Copy
+            outputBox.select();
+            document.execCommand('copy');
+            showStatus("Prompt copied to clipboard!", "success");
+        }
+
+        function saveToDatabase() {
+            const promptText = document.getElementById('finalPrompt').value.trim();
+            const subjectText = document.getElementById('p_subject').value.trim();
+            const styleText = document.getElementById('p_style').value;
+
+            if (!promptText) {
+                showStatus("Generate a prompt before saving.", "error");
+                return;
+            }
+
+            if (GOOGLE_SHEET_WEB_APP_URL === "YOUR_WEB_APP_URL_HERE") {
+                showStatus("Error: Google Web App URL is not set in the code.", "error");
+                return;
+            }
+
+            const btnSave = document.getElementById('btnSave');
+            btnSave.disabled = true;
+            btnSave.innerHTML = "Saving...";
+
+            // Send data to Google Sheets
+            fetch(GOOGLE_SHEET_WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important for avoiding CORS issues in simple setup
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify({
+                    prompt: promptText,
+                    subject: subjectText,
+                    style: styleText
+                })
+            })
+            .then(() => {
+                showStatus("Prompt saved to your Google Sheet!", "success");
+                btnSave.disabled = false;
+                btnSave.innerHTML = `<img src="./icons/save.png" class="w-5 h-5 mr-2" onerror="this.style.display='none'"> Save to Database`;
+            })
+            .catch(error => {
+                showStatus("Failed to save. Please try again.", "error");
+                console.error('Error!', error.message);
+                btnSave.disabled = false;
+                btnSave.innerHTML = `<img src="./icons/save.png" class="w-5 h-5 mr-2" onerror="this.style.display='none'"> Save to Database`;
+            });
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMsg');
+            statusEl.textContent = message;
+            statusEl.classList.remove('hidden', 'text-green-600', 'text-red-600');
+            
+            if (type === 'success') {
+                statusEl.classList.add('text-green-600');
+            } else {
+                statusEl.classList.add('text-red-600');
+            }
+
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                statusEl.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
